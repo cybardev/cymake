@@ -1,6 +1,12 @@
 #!/bin/sh
 # compile a single-file cython code into native binary
 
+# check for dependencies
+DEP_LIST="python3 cython gcc mpv youtube-dl"
+for dep in DEP_LIST; do
+	command -v "$dep" 1>/dev/null || { printf "$dep not found. Please install it.\n" ; exit 2; }
+done
+
 # check for residue files and remove them (doesn't work yet. I'll figure it out...)
 [ -e "./$1" ] && rm "./$1"
 [ -e "./$1.c" ] && rm "./$1.c"
